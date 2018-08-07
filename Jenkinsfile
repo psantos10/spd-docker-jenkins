@@ -12,25 +12,24 @@ pipeline {
                 echo 'Testing..'
             }
         }
-        stage('Deploy') {
+        
+        stage('Deploy to PREVIEW') {
+            when {
+                branch 'develop'
+            }
+
             steps {
-                step {
-                    echo 'START Deploying....' 
-                }
-                
-                step {
-                    if (env.BRANCH_NAME == 'preview') {
-                        echo 'Deploying to staging/preview environment'
-                    }
+                echo 'Deploying to PREVIEW'
+            }
+        }
 
-                    if (env.BRANCH_NAME == 'master') {
-                        echo 'Deploying to production environment'
-                    }
-                }
+        stage('Deploy to PRODUCTION') {
+            when {
+                branch 'master'
+            }
 
-                step {
-                    echo 'FINISH Deploying!' 
-                }
+            steps {
+                echo 'Deploying to PRODUCTION'
             }
         }
     }
