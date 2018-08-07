@@ -7,9 +7,13 @@ pipeline {
                 echo 'Building..'
             }
         }
+        
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'Testing...'
+                sh "bundle exec rake db:create"
+                sh "bundle exec rake db:migrate"
+                sh "bundle exec rspec spec"
             }
         }
         
