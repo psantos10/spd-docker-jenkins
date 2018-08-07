@@ -4,10 +4,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building....'
+                sh "gem install bundler"
             }
         }
-        
+
         stage('Test') {
             steps {
                 echo 'Testing...'
