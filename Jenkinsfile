@@ -14,13 +14,22 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
-                if (env.BRANCH_NAME == 'preview') {
-                    echo 'Deploying to staging/preview environment'
+                step {
+                    echo 'START Deploying....' 
+                }
+                
+                step {
+                    if (env.BRANCH_NAME == 'preview') {
+                        echo 'Deploying to staging/preview environment'
+                    }
+
+                    if (env.BRANCH_NAME == 'master') {
+                        echo 'Deploying to production environment'
+                    }
                 }
 
-                if (env.BRANCH_NAME == 'master') {
-                    echo 'Deploying to production environment'
+                step {
+                    echo 'FINISH Deploying!' 
                 }
             }
         }
